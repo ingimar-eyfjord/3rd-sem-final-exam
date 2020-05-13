@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'FFF Tusj';
+  src: url('/src/fonts/FFFTusj-Bold.eot');
+  src: local('FFF Tusj Bold'), local('FFFTusj-Bold'),
+      url('/src/fonts/FFFTusj-Bold.eot?#iefix') format('embedded-opentype'),
+      url('/src/fonts/FFFTusj-Bold.woff2') format('woff2'),
+      url('/src/fonts/FFFTusj-Bold.woff') format('woff'),
+      url('/src/fonts/FFFTusj-Bold.svg#FFFTusj-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+:root{
+  --row1: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *3);
+  --row2: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *2);
+  --beerContainerSizes: repeat(auto-fill, calc(((100vh - 4rem) - ( 4 * 1rem)) / 5));
+  --Small: clamp(1rem, 4vw, 1rem);
+  --Medium: clamp(1rem, 4vw, 2rem);
+  --Large: clamp(1.5rem, 4vw, 3rem);
+  --Large: clamp(2rem, 4vw, 4rem);
+  --XLLarge: clamp(2rem, 5vw, 5rem);
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +26,311 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./images/dashboard-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'FFF Tusj';
+  color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@media screen and (max-width: 2000px) {
+  h2{
+    padding: 0;
+    margin: 0;
+    font-family: 'FFF Tusj';
+    font-size: var(--large)
+  }
+  p{
+    font-size: var(--Small);
+  }
+  .tapcontent p{
+    font-size: calc(var(--Large) - 1rem);
+  }
+  .beerTitle{
+    font-size: calc(var(--Large) - 1rem);
+  }
+  .beerinfo > p{
+    font-size: calc(var(--Medium) - 1rem);
+  }
+  .QueueHeader{
+    font-size: var(--XLLarge);
+    text-align: center;
+  }
+  .downloadHeader{
+    font-size: calc(var(--Large) - 1rem);
+  }
+}
+@media screen and (min-width: 2001px) {
+  h2{
+    padding: 0;
+    margin: 0;
+    font-family: 'FFF Tusj';
+    font-size: var(--large)
+  }
+  p{
+    font-size: var(--Small);
+  }
+  .tapcontent p{
+    font-size: calc(var(--Large) - 1rem);
+  }
+  .beerTitle{
+    font-size: var(--Large);
+  }
+  .beerinfo > p{
+    font-size: calc(var(--Small) + 0.2vw);
+  }
+  .downloadHeader{
+    font-size:  calc(var(--Large) - 0.5rem);
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .tapcontent p{
+    font-size: calc(var(--Large) - 1.5rem);
+  }
+}
+
+    .QueueHeader{
+      font-size: var(--XLLarge);
+      text-align: center;
+    }
+   
+
+.App{
+  height: 100vh;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: var(--row1) var(--row2)
+}
+.BeerContainer{
+  display: grid;
+  width: calc(100% - 4rem);
+  height: calc(100vh - 4rem);
+  grid-template-rows: var(--beerContainerSizes);
+  grid-row-gap: 1rem;
+  margin-left: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.Rows{
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,0.41827170321253504) 0%, rgba(255,255,255,0.4154705827643558) 100%);
+  display: block;
+  width: calc(100% -1rem);
+  height: calc(100% -1rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 2rem;
+  padding: 1rem;
+}
+.queue{
+  padding-top: 2rem;
+  height: calc(100% - 2rem);
+  max-height: calc(100% - 1rem);
+  width: calc(100% - 2rem);
+  display: grid;
+  grid-template-rows: 15% 85%;
+  grid-row-gap: 1%;
+  overflow: hidden;
+}
+.queueRows{
+  display: grid;
+  height: 100vh;
+  grid-template-rows: repeat(auto-fit, 10vh);
+  grid-row-gap: 1%;
+}
+.donloadInfo{
+  position: relative;
+  grid-column: 2;
+  padding-top: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+}
+.donloadInfo > .Rows{
+  height: calc(100% - 2rem);
+}
+.donloadInfo .Rows{
+  display: block;
+}
+.donloadInfo h2{
+  width: 100%;
+  text-align: center;
+}
+.QRcode{
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 35%;
+  transform: translateX(-50%);
+  width: 5vw;
+  height: 5vw;
+  background-image: url("./images/qrcode.png");
+  background-size: cover;
+}
+.AccentLogo{
+  position: absolute;
+  display: block;
+  left: 25%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  width: 7vw;
+  height: 7vw;
+  background-image: url("./images/accentLogo.svg");
+  background-size: cover;
+}
+.logo{
+  position: absolute;
+  display: block;
+  left: 75%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  width: 5.8vw;
+  height: 7vw;
+  background-image: url("./images/logo.svg");
+  background-size: cover;
+}
+
+
+.BeerContainerSingle{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 30% 20% 20%;
+  grid-column-gap: 2% ;
+}
+.image{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+[dat-img="elhefe.png"]{
+  background-image: url("./images/images/elhefe.png");
+}
+[dat-img="githop.png"]{
+  background-image: url("./images/images/githop.png");
+}
+[dat-img="hoppilyeverafter.png"]{
+  background-image: url("./images/images/hoppilyeverafter.png");
+}
+[dat-img="row26.png"]{
+  background-image: url("./images/images/row26.png");
+}
+[dat-img="sleighride.png"]{
+  background-image: url("./images/images/sleighride.png");
+}
+[dat-img="fairytaleale.png"]{
+  background-image: url("./images/images/fairytaleale.png");
+}
+[dat-img="hollaback.png"]{
+  background-image: url("./images/images/hollaback.png");
+}
+[dat-img="mowintime.png"]{
+  background-image: url("./images/images/mowintime.png");
+}
+[dat-img="ruinedchildhood.png"]{
+  background-image: url("./images/images/ruinedchildhood.png");
+}
+[dat-img="steampunk.png"]{
+  background-image: url("./images/images/steampunk.png");
+}
+
+.beerTitle{
+  white-space: nowrap;
+  padding-bottom: 5%;
+}
+.beerinfo p{
+  padding: 0.2rem;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tapInfo{
+  text-align: center;
+  display: grid;
+  grid-template-rows: 55% 45%;
+}
+.tapcontent{
+  grid-row: 2;
+}
+.tapcontent p {
+  padding: 0;
+  margin: 0;
+}
+
+.catagory::before{
+  content: "CATAGORY: ";
+  color: orange;
+}
+
+.alc::before{
+  content: "ALC: ";
+  color: orange;
+}
+.alc::after{
+  content: "%";
+
+}
+
+.ml::before{
+  content: "ML: ";
+  color: orange;
+}
+
+.price::before{
+  content: "Price: ";
+  color: orange;
+}
+.Bartap{
+  display: block;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url("./images/Tap.svg");
+}
+
+.queueRows {
+  perspective: 1000px;
+}
+
+.queueRows .Rows {
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  animation: in 1s calc(var(--animation-order) * 500ms) forwards ease-in;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.Guest{
+  grid-column: 1;
+}
+.queueRows .Rows .Orderis{
+  padding: 0;
+  margin: 0.5rem;
+  grid-column: 2;
+  grid-row: span 2;
+}
+.queueRows .Rows p{
+  white-space: nowrap;
+}
+
+@keyframes in{
+  to{
+    opacity: 1;
+    transform: none;
+  }
+}
+
+[dat-serving="serving"]{
+  animation: out 1s calc(var(--animation-order) * 500ms) forwards ease-in;
+}
+@keyframes out{
+  to{
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
 }

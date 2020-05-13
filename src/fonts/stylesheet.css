@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'FFF Tusj';
+    src: url('FFFTusj-Bold.eot');
+    src: local('FFF Tusj Bold'), local('FFFTusj-Bold'),
+        url('FFFTusj-Bold.eot?#iefix') format('embedded-opentype'),
+        url('FFFTusj-Bold.woff2') format('woff2'),
+        url('FFFTusj-Bold.woff') format('woff'),
+        url('FFFTusj-Bold.svg#FFFTusj-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
