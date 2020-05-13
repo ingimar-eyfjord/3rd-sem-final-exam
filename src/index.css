@@ -297,10 +297,6 @@ body {
 }
 
 .queueRows .Rows {
-  opacity: 0;
-  transform: rotateX(90deg);
-  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
-  animation: in 1s calc(var(--animation-order) * 500ms) forwards ease-in;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -318,19 +314,26 @@ body {
   white-space: nowrap;
 }
 
-@keyframes in{
-  to{
-    opacity: 1;
-    transform: none;
-  }
+[data-serving="notServing"]{
+  opacity: 0;
+  transform: rotateX(90deg);
+  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
+  animation: in 1s calc(var(--animation-order) * 500ms) forwards ease-in;
 }
-
-[dat-serving="serving"]{
-  animation: out 1s calc(var(--animation-order) * 500ms) forwards ease-in;
+    @keyframes in{
+      to{
+        opacity: 1;
+        transform: none;
+      }
+    }
+[data-serving="serving"]{
+  background-color: green;
+  animation: out 1s 2s forwards ease-in;
 }
 @keyframes out{
   to{
     opacity: 0;
+    scale: 0;
     transform: rotateX(90deg);
   }
 }

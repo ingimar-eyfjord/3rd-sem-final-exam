@@ -19,7 +19,6 @@ function App() {
   const [taps, setTaps] = useState(tapsArray)
   const beersArray = []
   const [beers, setBeers] = useState(beersArray)
-
   const queueBankArray = []
   const [queueBank, setBank] = useState(queueBankArray)
 
@@ -57,6 +56,7 @@ function App() {
           if (queueData.lenght == 1) {
             // if one then we neet to take the item and do stuff with it
             let addPerson = (queueData) => {
+              console.log("it was this 1")
               // copy the queue state and turn it into a variable
               let array = [...queue]
               // now we filter the coppied array where you filter the already existing item out by matching the id's in there with the id of the item we fetched
@@ -67,15 +67,18 @@ function App() {
               // Now we set the the state of the queue with the new array, since it's states if the item already exists then it won't update, 
               setQueue(newarray)
             }
-            addPerson()
+            addPerson(queueData)
           } else {
             // In this else statement wer'e going to check if the item we fetched is more than one item in an array, because then we need a foreach.
             // This function is the same one as above but I need two because I'm accessing it inside a statement.
             let addPersons = (oneData) => {
+              console.log("it was this 2")
               let array = [...queue]
-              let filteredList = array.filter(e => e.id !== oneData.id);
+              let filteredList = array.filter(e => e.id != oneData.id);
               let newarray = [...filteredList, oneData]
               setQueue(newarray)
+
+
             }
             /// - same function as above ends.
             // Here we just do a simple for each where we pass along each item at a time to the filter function.
@@ -85,14 +88,8 @@ function App() {
           }
         }
       }
-
-
-
-
     }, 5000);
-
   }
-
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -127,7 +124,18 @@ function App() {
 
 
 
-
+  function deleteServedItems(id) {
+    console.log(id)
+    let deleteOrder = (id) => {
+      let array = [...queue]
+      let filteredList = array.filter(e => e.id !== id);
+      let newarray = [...filteredList]
+      setQueue(newarray)
+    }
+    setTimeout(() => {
+      deleteOrder(id)
+    }, 3000);
+  }
 
   // console.log("bartenders", bartenders, "queue", queue, "serving", serving, "storage", storage, "taps", taps, "beers", beers)
   // console.log("queue", queue, "serving", serving)
@@ -135,7 +143,7 @@ function App() {
   return (
     <div className="App">
       <Rows beers={beers} />
-      <Queue serving={serving} queue={queue} />
+      <Queue deleteServedItems={deleteServedItems} serving={serving} queue={queue} />
       <DownloadInfo />
     </div>
   );

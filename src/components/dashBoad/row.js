@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import Beercomponent from "./beerComponent"
 
 export default function Rows({ beers }) {
-    const mapped = beers.map((beer) => <Beercomponent alc={beer.alc} category={beer.category} label={beer.label} name={beer.name} popularity={beer.popularity} pouringSpeed={beer.pouringSpeed} />)
+    const mapped = beers.map((beer, index) => <Beercomponent alc={beer.alc} key={index} category={beer.category} label={beer.label} name={beer.name} popularity={beer.popularity} pouringSpeed={beer.pouringSpeed} />)
     return (
         <div className="BeerContainer">
             <div className="Rows">{mapped[0]}{mapped[1]}</div>
