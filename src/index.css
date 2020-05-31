@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'FFF Tusj';
   src: url('/src/fonts/FFFTusj-Bold.eot');
   src: local('FFF Tusj Bold'), local('FFFTusj-Bold'),
@@ -8,7 +8,7 @@
       url('/src/fonts/FFFTusj-Bold.svg#FFFTusj-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
-}
+} */
 :root{
   --row1: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *3);
   --row2: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *2);
@@ -26,18 +26,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./images/dashboard-background.jpg");
+  background-color: white;
   background-size: cover;
   background-repeat: no-repeat;
-  font-family: 'FFF Tusj';
-  color: white;
+
+  color: black
 }
 
 @media screen and (max-width: 2000px) {
   h2{
     padding: 0;
     margin: 0;
-    font-family: 'FFF Tusj';
     font-size: var(--large)
   }
   p{
@@ -64,8 +63,10 @@ body {
   h2{
     padding: 0;
     margin: 0;
-    font-family: 'FFF Tusj';
     font-size: var(--large)
+  }
+  .status{
+    font-size: var(--Medium) ;
   }
   p{
     font-size: var(--Small);
@@ -137,10 +138,9 @@ body {
   overflow: hidden;
 }
 .queueRows{
-  display: grid;
+  display: flex;
   height: 100vh;
-  grid-template-rows: repeat(auto-fit, 10vh);
-  grid-row-gap: 1%;
+ flex-direction: column;
 }
 .donloadInfo{
   position: relative;
@@ -264,12 +264,12 @@ body {
 
 .catagory::before{
   content: "CATAGORY: ";
-  color: orange;
+  color: rgba(236, 167, 2);
 }
 
 .alc::before{
   content: "ALC: ";
-  color: orange;
+  color: rgba(236, 167, 2);
 }
 .alc::after{
   content: "%";
@@ -278,12 +278,12 @@ body {
 
 .ml::before{
   content: "ML: ";
-  color: orange;
+  color: rgba(236, 167, 2);
 }
 
 .price::before{
   content: "Price: ";
-  color: orange;
+  color: rgba(236, 167, 2);
 }
 .Bartap{
   display: block;
@@ -300,40 +300,93 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  grid-column-gap: 0.5rem;
+  height: 8vh;
+  margin-bottom: 1rem;
 }
 .Guest{
   grid-column: 1;
 }
 .queueRows .Rows .Orderis{
   padding: 0;
-  margin: 0.5rem;
+  margin: 0.1rem;
   grid-column: 2;
   grid-row: span 2;
 }
 .queueRows .Rows p{
   white-space: nowrap;
 }
+.OrderBeers{
+  grid-row: span 2;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
 
-[data-serving="notServing"]{
-  opacity: 0;
-  transform: rotateX(90deg);
-  transition: all 0.5s cubic-bezier(.36,-0.64,.34,1.76);
-  animation: in 1s calc(var(--animation-order) * 500ms) forwards ease-in;
-}
-    @keyframes in{
-      to{
-        opacity: 1;
-        transform: none;
-      }
-    }
 [data-serving="serving"]{
-  background-color: green;
-  animation: out 1s 2s forwards ease-in;
+  background-color: rgba(236, 167, 2, 0.5);;
 }
-@keyframes out{
-  to{
-    opacity: 0;
-    scale: 0;
-    transform: rotateX(90deg);
+.statusInfo{
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+
+}
+.status{
+  padding: 0;
+  margin: 0;
+}
+
+.transition-enter {
+opacity: 0.01;
+transform: none;
+transform: rotateX(90deg);
+
+}
+.transition-enter-active {
+opacity: 1;
+transform: none;
+transition: all 1000ms ease-in;
+}
+.transition-exit {
+opacity: 1;
+transform: none;
+}
+.transition-exit-active {
+opacity: 0.01;
+transform: rotateX(130deg);
+transition: all 1000ms ease-in;
+}
+
+.transitionServe-enter {
+  opacity: 1;
+  transform: none;
   }
+  .transitionServe-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: all 1000ms ease-in;
+  }
+  .transitionServe-exit {
+  opacity: 1;
+  transform: none;
+  }
+  .transitionServe-exit-active {
+  opacity: 0.01;
+  height: 0px !important;
+  transform: rotateX(70deg);
+  transition: all 1000ms ease-in;
+  }
+
+  .tapINrow{
+    height: 100%;
+    justify-self: flex-end;
+  }
+
+#prefix__mask{
+  height: 0px!important;
+  transform: translateY(-50%);
+}
+[data-servingornot="Not"]{
+  grid-column: 4;
 }
