@@ -29,7 +29,6 @@ function App() {
           "Content-Type": "application/json; charset=utf-8",
         },
       }).then(res => res.json()).then(data => setData(data));
-
       function setData(data) {
         setBartenders(data.bartenders)
         setServing(data.serving)
@@ -37,7 +36,7 @@ function App() {
         setTaps(data.taps)
         setQueue(data.queue)
       }
-    }, 5000);
+    }, 10000);
   }
 
   function useInterval(callback, delay) {
@@ -61,7 +60,7 @@ function App() {
   }
   Counter()
 
-
+  let thisPop = []
   useEffect(() => {
     fetch(Beers, {
       method: "get",
@@ -99,6 +98,7 @@ function App() {
     }
   }, [queue])
 
+
   useEffect(() => {
     const populars = [...popular]
     if (populars.length > 0) {
@@ -121,13 +121,80 @@ function App() {
       }
       setpopularList(array)
     }
+
   }, [popular])
+
+  const [popPlace, setpopPlace] = useState(storageArray)
+  useEffect(() => {
+    for (let i = 0; i < 3; i++) {
+      thisPop.push(pupularList[i])
+    }
+    if (thisPop.length === 3 && thisPop[0] != undefined || thisPop.length === 3 && !thisPop[1] === undefined) {
+      if (thisPop[2] !== undefined) {
+        function makeJSON(arr2) {
+          let arr = [
+            {
+              name: arr2[0].Name,
+              place: 1,
+            },
+            {
+              name: arr2[1].Name,
+              place: 2
+            },
+            {
+              name: arr2[2].Name,
+              place: 3,
+            }
+          ]
+          postData(arr)
+          setpopPlace(arr)
+        }
+        makeJSON(thisPop)
+      }
+    }
+
+    function postData(string) {
+      fetch("https://foobarorders-577e.restdb.io/rest/popular", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "x-apikey": "5ecd2b70ae488b280ef33345",
+          "cache-control": "no-cache"
+        }
+      }).then(res => res.json().then(data => deleteData(data)))
+
+      function deleteData(data) {
+        let array = []
+        data.forEach(e => {
+          array.push(e._id)
+        })
+
+        console.log(string)
+        for (let i = 0; i <= 2; i++) {
+
+
+          fetch(`https://foobarorders-577e.restdb.io/rest/popular/` + array[i] + ``, {
+            method: "put",
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+              "x-apikey": "5ecd2b70ae488b280ef33345",
+              "cache-control": "no-cache"
+            },
+            body: JSON.stringify(string[i])
+          }).then(res => res.json().then(data => console.log(data)))
+        }
+      }
+    }
+  }, [queue])
+
+
+
 
   return (
     <div className="App">
-      <Rows pupularList={pupularList} beers={beers} taps={taps} />
-      <Queue serving={serving} queue={queue} />
-      <DownloadInfo />
+      <Rows popPlace={popPlace} popular={popular} pupularList={pupularList} beers={beers} taps={taps} />
+      <Queue serving={serving} bartenders={bartenders} queue={queue} />
+      {/* <DownloadInfo /> */}
     </div>
   );
 }

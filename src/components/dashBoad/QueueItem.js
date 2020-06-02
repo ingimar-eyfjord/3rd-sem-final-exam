@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Moment from 'react-moment';
 export default function QueueItem(props) {
     let counts = {};
     props.order.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
@@ -16,7 +17,12 @@ export default function QueueItem(props) {
     const time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
     let serving = ""
 
+    const randomNames = ["Mario", "Luigi", "Bowser", "Yoshi", "Wario", "Toad", "Princess Peach", "Princess Daisy", "Rosalina", "Diddy Kong", "Toadsworth", "Scorpion"]
+
+
     let origName = "Program"
+    origName = randomNames[getRandomIntInclusive(0, 11)]
+
     const [orderName, setOrderName] = useState(origName)
     useEffect(() => {
         fetch(`https://foobarorders-577e.restdb.io/rest/orders?q={"orderID": ` + props.id + `}`, {
@@ -28,7 +34,6 @@ export default function QueueItem(props) {
             },
         }).then(res => res.json()).then(data => {
             if (data.length > 0) {
-                console.log(data)
                 const name = data[0].GuestName
                 setOrderName(name)
             }
@@ -36,19 +41,34 @@ export default function QueueItem(props) {
         });
     }, [])
 
+
+
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    }
+
     if (props.serving) {
-        serving = "serving"
+        serving = "Now serving"
     }
     else { serving = "In queue" }
+    let who = ""
+    props.bartenders.forEach(e => {
+        if (e.servingCustomer === props.id) {
+            who = e.name
+        }
+    })
     return (
         <div style={props.style} data-serving={serving} key={props.id} className="Rows">
-            <h2 className="Guest">{orderName}</h2>
+            <h2 className="Guest">{orderName} | order #{props.id}</h2>
             <div className="OrderBeers">
                 {mapped}
             </div>
             <div className="statusInfo">
-                <p className="status">Status: {serving}</p>
-                <p >Ordered at: {time}</p>
+                <p className="status">{serving}</p>
+                {serving === "Now serving" ? <p>Served by: {who}</p> : ""}
+                <p className="moment" >Ordered: <Moment fromNow>{time}</Moment></p>
             </div>
         </div>
     )

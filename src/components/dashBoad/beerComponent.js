@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react"
+import SvgPopular from "../popular"
+import SvgMost from "../mostPopular"
 import SvgComponent from "./tap"
 export default function Beercomponent(props) {
+
+
     let level = 0
     let tapsNum = []
     props.taps.forEach(e => {
         if (e.beer == props.name) {
             tapsNum.push(e.id)
             level = (e.level / e.capacity) * 100
-
         }
     })
 
@@ -21,21 +24,22 @@ export default function Beercomponent(props) {
     const filterurl = `url(#` + idluminosity + `)`
     const Serving = tapNumber != "" ? "Serving" : "Not"
     const colorcalcgreen = (level / 100) * 255
-    const colorcalcred = 255 - (level / 100) * 255
-    const color = `rgb(` + colorcalcred + `,` + colorcalcgreen + `, 000 )`
+    const colorcalcblue = (level / 100) * 255
+    const color = `rgb( 000 ,` + colorcalcgreen + `, ` + colorcalcblue + `)`
+
 
     let popularity = "normal"
-    let thisPop = []
-    for (let i = 0; i < 3; i++) {
-        thisPop.push(props.pupularList[i])
-    }
-    if (props.pupularList > 0) {
-        if (thisPop[0].Name == props.name) {
+
+    if (props.thisPop.length === 3) {
+        if (props.thisPop[0].name === props.name) {
             popularity = "Most Popular"
-        } else if (thisPop[1].Name == props.name || thisPop[2].Name == props.name) {
-            popularity = "Popular"
+        } else {
+            if (props.thisPop[1].name === props.name || props.thisPop[2].name === props.name) {
+                popularity = "Popular"
+            }
         }
     }
+    const Tapmap = tapsNum.map((e, index) => <SvgComponent key={index} idluminosity={idluminosity} color={color} filterurl={filterurl} maskurl={maskurl} idprefixmask={idprefixmask} svgvalue={svgvalue} className="tapINrow" />)
     return (
         <div className="BeerContainerSingle">
             <div dat-img={props.label} className="image"></div>
@@ -46,14 +50,22 @@ export default function Beercomponent(props) {
                 <p className="ml">500</p>
                 <p className="price">50DKK</p>
             </div>
-            <div data-servingornot={Serving} className="tapInfo">
-                <div className={popularity}>{popularity == "Most Popular" ? "Most Popular" : ""}</div>
-                <div className="tapcontent">
-                    <p>{tapNumber != "" ? "TAP" : "Not"}</p>
-                    <p>{tapNumber != "" ? tapNumber : "Serving"}</p>
-                </div>
+
+            <div className="tapInfo">
+                {popularity == "Most Popular" ? <div className="popular"> <SvgMost></SvgMost></div> : <div className="displaynone"></div>}
+                {popularity == "Popular" ? <div className="popular"><SvgPopular></SvgPopular></div> : <div className="displaynone"></div>}
             </div>
-            {tapNumber != "" ? <SvgComponent idluminosity={idluminosity} color={color} filterurl={filterurl} maskurl={maskurl} idprefixmask={idprefixmask} key={props.id} svgvalue={svgvalue} className="tapINrow" /> : ""}
+
+            <div className="tapcont">
+                {tapNumber != "" ? "TAP" : <div className="displaynone"></div>}
+                <div className="taps">
+                    {tapNumber != "" ? Tapmap : <p style={{ marginTop: "auto" }}>Not</p>}
+                </div>
+                <p>{tapNumber != "" ? tapNumber : "serving"}</p>
+            </div>
+
         </div>
     )
+
+
 }

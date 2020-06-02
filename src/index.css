@@ -12,7 +12,7 @@
 :root{
   --row1: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *3);
   --row2: calc((((100vh + 2rem) - ( 3 * 1rem)) / 5) *2);
-  --beerContainerSizes: repeat(auto-fill, calc(((100vh - 4rem) - ( 4 * 1rem)) / 5));
+  --beerContainerSizes: repeat(auto-fill, calc(((100vh - 8rem) - ( 4 * 1rem)) / 5));
   --Small: clamp(1rem, 4vw, 1rem);
   --Medium: clamp(1rem, 4vw, 2rem);
   --Large: clamp(1.5rem, 4vw, 3rem);
@@ -26,8 +26,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url("./images/dashboard-background.jpg"); */
   background-color: white;
   background-size: cover;
+
   background-repeat: no-repeat;
 
   color: black
@@ -43,17 +45,30 @@ body {
     font-size: var(--Small);
   }
   .tapcontent p{
-    font-size: calc(var(--Large) - 1rem);
+    font-size: calc(var(--Small) - 1rem);
   }
   .beerTitle{
-    font-size: calc(var(--Large) - 1rem);
+    font-size: 2rem;
+    font-weight: 700;
   }
   .beerinfo > p{
-    font-size: calc(var(--Medium) - 1rem);
+    font-size: 1rem
   }
+
+  .tapcont p:first-child{
+    margin-top: auto;
+    font-size: 1rem;
+  }
+  .tapcont p:last-child{
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
   .QueueHeader{
     font-size: var(--XLLarge);
     text-align: center;
+    margin: 0;
+    height: fit-content;
   }
   .downloadHeader{
     font-size: calc(var(--Large) - 1rem);
@@ -72,13 +87,14 @@ body {
     font-size: var(--Small);
   }
   .tapcontent p{
-    font-size: calc(var(--Large) - 1rem);
+    font-size: calc(var(--Medium));
   }
   .beerTitle{
-    font-size: var(--Large);
-  }
+    font-size: 3rem;
+   font-weight: 700;  }
   .beerinfo > p{
     font-size: calc(var(--Small) + 0.2vw);
+    font-weight: 500;
   }
   .downloadHeader{
     font-size:  calc(var(--Large) - 0.5rem);
@@ -94,46 +110,47 @@ body {
     .QueueHeader{
       font-size: var(--XLLarge);
       text-align: center;
+      margin: 0;
+      height: fit-content;
     }
    
 
 .App{
   height: 100vh;
+  overflow: hidden;
   padding-bottom: 0;
   margin-bottom: 0;
   display: grid;
-  grid-template-columns: 80% 20%;
-  grid-template-rows: var(--row1) var(--row2)
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto
 }
 .BeerContainer{
   display: grid;
-  width: calc(100% - 4rem);
-  height: calc(100vh - 4rem);
+  width: calc(100% - 2rem);
+  height: calc(100vh - 1rem);
   grid-template-rows: var(--beerContainerSizes);
-  grid-row-gap: 1rem;
-  margin-left: 2rem;
+  grid-row-gap: 2rem;
+  margin-left: 1rem;
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  position: relative;
 }
 
 .Rows{
-  background: rgb(0,0,0);
-  background: linear-gradient(0deg, rgba(0,0,0,0.41827170321253504) 0%, rgba(255,255,255,0.4154705827643558) 100%);
   display: block;
-  width: calc(100% -1rem);
-  height: calc(100% -1rem);
+  width: 100%;
+max-height: calc(((100vh - 8rem) - ( 4 * 1rem)) / 5);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2rem;
-  padding: 1rem;
 }
 .queue{
   padding-top: 2rem;
+  margin-left: 1rem;
   height: calc(100% - 2rem);
   max-height: calc(100% - 1rem);
-  width: calc(100% - 2rem);
+  width: 100%;
   display: grid;
-  grid-template-rows: 15% 85%;
   grid-row-gap: 1%;
   overflow: hidden;
 }
@@ -195,14 +212,18 @@ body {
 
 
 .BeerContainerSingle{
-  height: 100%;
   display: grid;
   grid-template-columns: 25% 30% 20% 20%;
   grid-column-gap: 2% ;
+  border-radius: 5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #f7f7f7;
 }
 .image{
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
   background-size: contain;
   background-position: center;
@@ -241,25 +262,33 @@ body {
 
 .beerTitle{
   white-space: nowrap;
-  padding-bottom: 5%;
+  padding: 0;
+  font-weight: normal;
+  font-weight: 600;
 }
+
 .beerinfo p{
-  padding: 0.2rem;
+  padding: 0rem;
   margin: 0;
+  margin-top: 0.1rem;
   text-transform: uppercase;
   white-space: nowrap;
 }
 .tapInfo{
-  text-align: center;
-  display: grid;
+display: flex;
+flex-direction: column;
   grid-template-rows: 55% 45%;
+  grid-column: 3;
+  height: 100%;
 }
 .tapcontent{
   grid-row: 2;
+  max-height: 100%;
 }
 .tapcontent p {
   padding: 0;
   margin: 0;
+  font-weight: 500;
 }
 
 .catagory::before{
@@ -268,7 +297,7 @@ body {
 }
 
 .alc::before{
-  content: "ALC: ";
+  content: "ALC.vol: ";
   color: rgba(236, 167, 2);
 }
 .alc::after{
@@ -298,11 +327,19 @@ body {
 
 .queueRows .Rows {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  width: 26vw;
+  grid-template-columns: 58% 42%;
+  grid-template-rows: 2vh auto;
   grid-column-gap: 0.5rem;
-  height: 8vh;
+  min-height: 8vh;
+  height: fit-content;
   margin-bottom: 1rem;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+  border-radius: 5px;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 2px;
 }
 .Guest{
   grid-column: 1;
@@ -315,6 +352,7 @@ body {
 }
 .queueRows .Rows p{
   white-space: nowrap;
+margin: 0;
 }
 .OrderBeers{
   grid-row: span 2;
@@ -323,8 +361,26 @@ body {
   flex-direction: column;
 }
 
-[data-serving="serving"]{
-  background-color: rgba(236, 167, 2, 0.5);;
+[data-serving="Now serving"]{
+  background-color: rgb(236, 167, 2);
+  border-radius: 5px;
+}
+[data-serving="In queue"]{
+  border-radius: 5px;
+  border-color: lightgray !important;
+  border-style: solid;
+  border-width: 2px;
+  background-color: #f7f7f7;
+}
+.tapInfo{
+  position: relative;
+}
+.popular{
+  margin-top: auto;
+  height: auto;
+  bottom: 0;
+  width: 80%;
+position: absolute;
 }
 .statusInfo{
   grid-row: 2;
@@ -336,57 +392,220 @@ body {
   padding: 0;
   margin: 0;
 }
+  .tapcont{
+    justify-content: center;
+  }
+  #prefix__mask{
+    height: 0px!important;
+    transform: translateY(-50%);
+  }
+  [data-servingornot="Not"]{
+    grid-column: 4;
+  }
+  .tapcont{
+    width: 100%;
+    max-height: calc(((100vh - 8rem) - ( 4 * 1rem)) / 5);
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 25% 50% 25%;
+grid-column:  4;
+grid-row:1 ;
+overflow: hidden;
+  }
+  .tapcont p:first-child{
+    grid-column: span 2;
+    grid-row: 1;
+    margin-top: 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .tapcont p:last-child{
+    grid-row: 3;
+    grid-column: span 2;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .taps{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  grid-column: span 2;
+  grid-row: 2;
+  width: 100%;
+}
+ .tapINrow{
+ height: 100%;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+ }
+ @media screen and (min-width: 1300px) {
+   [data-serving="Now serving"]{
+     color: white;
+   }
+.Guest{
+  font-size: 1.5rem;
+}
+.status{
+  font-size: 2rem;
+  font-weight: 700;
+}
+.statusInfo p {
+  font-weight: 700;
+  
+}
+.statusInfo p:first-child {
+  padding-top: 1rem;
+}
+.moment{
+  padding-top: 1rem;
+  font-weight: 700;
+}
+.Orderis{
+  font-weight: 700;
+  font-size: 1.5rem;
+  align-self: flex-end;
+}
+
+ }
+ @media screen and (max-width: 1300px) {
+  .App{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .BeerContainer{
+    width: 94vw;
+    height: fit-content;
+    grid-row-gap: 1rem;
+    margin-left: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .Rows{
+    display: grid;
+    grid-template-columns: 1fr;
+ grid-template-rows: 15vh 15vh;
+grid-row-gap: 1rem;
+margin-bottom: 1rem;
+height: 30vh;
+max-height: unset;
+  }
+  
+
+.BeerContainerSingle{
+  display: grid;
+  grid-template-columns: 35% 35% 25%;
+  grid-column-gap: 2% ;
+  border-radius: 5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 2px;
+  height: 15vh;
+  background-color: #f7f7f7;
+}
+.image{
+  display: block;
+  width: auto;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tapcont{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+grid-column:  3;
+grid-row:1 ;
+overflow: hidden;
+}
+.tapINrow{
+  display: none;
+}
+.tapcont p:first-child{
+  margin-top: auto;
+  font-size: 1rem;
+}
+.tapcont p:last-child{
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+.beerinfo > p {
+  margin-top: auto;
+ font-size: 0.8rem;
+}
+.queue {
+  height: fit-content;
+  width: 94vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.queueRows .Rows {
+width: 87%;
+}
+.queueRows .Rows > h2 {
+  font-size: 0.8rem;
+}
+.OrderBeers > p, .statusInfo > p{
+  font-size: 0.8rem;
+}
+
+.App{
+  height: unset;
+}
+.tapInfo{
+  display: none;
+}
+}
+.displaynone{
+  display:none;
+}
+
+
 
 .transition-enter {
-opacity: 0.01;
-transform: none;
-transform: rotateX(90deg);
-
-}
-.transition-enter-active {
-opacity: 1;
-transform: none;
-transition: all 1000ms ease-in;
-}
-.transition-exit {
-opacity: 1;
-transform: none;
-}
-.transition-exit-active {
-opacity: 0.01;
-transform: rotateX(130deg);
-transition: all 1000ms ease-in;
-}
-
-.transitionServe-enter {
-  opacity: 1;
-  transform: none;
+  opacity: 0.01 !important;
+  transform: none !important;
+  transform: rotateX(90deg) !important;
+  
   }
-  .transitionServe-enter-active {
-  opacity: 1;
-  transform: none;
-  transition: all 1000ms ease-in;
+  .transition-enter-active {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: all 1000ms ease-in !important;
   }
-  .transitionServe-exit {
-  opacity: 1;
-  transform: none;
+  .transition-exit {
+  opacity: 1 !important;
+  transform: none !important;
   }
-  .transitionServe-exit-active {
-  opacity: 0.01;
-  height: 0px !important;
-  transform: rotateX(70deg);
-  transition: all 1000ms ease-in;
+  .transition-exit-active {
+  transition: all 1000ms ease-in !important;
   }
 
-  .tapINrow{
-    height: 100%;
-    justify-self: flex-end;
-  }
-
-#prefix__mask{
-  height: 0px!important;
-  transform: translateY(-50%);
-}
-[data-servingornot="Not"]{
-  grid-column: 4;
-}
+  .transitionServe-enter {
+    opacity: 0.01 !important;
+    transform: none !important;
+    transform: rotateX(90deg) !important;
+    
+    }
+    .transitionServe-enter-active {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: all 1000ms ease-in !important;
+    }
+    .transitionServe-exit {
+    opacity: 1 !important;
+    transform: none !important;
+    }
+    .transitionServe-exit-active {
+      transition: all 1000ms ease-in !important;
+      transform: rotateX(130deg) !important;
+      opacity: 0 !important;
+      height: 0px !important;
+    }

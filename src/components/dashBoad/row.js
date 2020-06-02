@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import Beercomponent from "./beerComponent"
 
-export default function Rows({ beers, taps, pupularList }) {
+export default function Rows({ beers, taps, pupularList, popular, popPlace }) {
 
-    const mapped = beers.map((beer, index) => <Beercomponent alc={beer.alc} pupularList={pupularList} id={index} key={index} category={beer.category} label={beer.label} taps={taps} name={beer.name} popularity={beer.popularity} pouringSpeed={beer.pouringSpeed} />)
+    const mapped = beers.map((beer, index) => <Beercomponent thisPop={popPlace} popular={popular} alc={beer.alc} pupularList={pupularList} id={index} key={index} category={beer.category} label={beer.label} taps={taps} name={beer.name} popularity={beer.popularity} pouringSpeed={beer.pouringSpeed} />)
     return (
         <div className="BeerContainer">
             <div className="Rows">{mapped[0]}{mapped[1]}</div>
