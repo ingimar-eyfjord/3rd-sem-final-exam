@@ -57,7 +57,7 @@ export default function Beercomponent(props) {
             </div>
 
             <div className="tapcont">
-                {tapNumber != "" ? "TAP" : <div className="displaynone"></div>}
+                {tapNumber != "" ? <p>TAP</p> : <div className="displaynone"></div>}
                 <div className="taps">
                     {tapNumber != "" ? Tapmap : <p style={{ marginTop: "auto" }}>Not</p>}
                 </div>

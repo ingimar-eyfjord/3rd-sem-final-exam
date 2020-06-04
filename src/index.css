@@ -569,11 +569,10 @@ width: 87%;
 
 
 
-.transition-enter {
+  .transition-enter {
   opacity: 0.01 !important;
   transform: none !important;
   transform: rotateX(90deg) !important;
-  
   }
   .transition-enter-active {
   opacity: 1 !important;
@@ -587,25 +586,23 @@ width: 87%;
   .transition-exit-active {
   transition: all 1000ms ease-in !important;
   }
-
   .transitionServe-enter {
-    opacity: 0.01 !important;
-    transform: none !important;
-    transform: rotateX(90deg) !important;
-    
-    }
-    .transitionServe-enter-active {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: all 1000ms ease-in !important;
-    }
-    .transitionServe-exit {
-    opacity: 1 !important;
-    transform: none !important;
-    }
-    .transitionServe-exit-active {
-      transition: all 1000ms ease-in !important;
-      transform: rotateX(130deg) !important;
-      opacity: 0 !important;
-      height: 0px !important;
-    }
+  opacity: 0.01 !important;
+  transform: none !important;
+  transform: rotateX(90deg) !important;
+  }
+  .transitionServe-enter-active {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: all 1000ms ease-in !important;
+  }
+  .transitionServe-exit {
+  opacity: 1 !important;
+  transform: none !important;
+  }
+  .transitionServe-exit-active {
+  transition: all 1000ms ease-in !important;
+  transform: rotateX(130deg) !important;
+  opacity: 0 !important;
+  height: 0px !important;
+  }

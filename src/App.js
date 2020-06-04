@@ -5,8 +5,8 @@ import Queue from "./components/dashBoad/queue"
 import DownloadInfo from "./components/dashBoad/downloadInfo"
 
 function App() {
-  const URL = "https://foobar-app-3.herokuapp.com/"
-  const Beers = "https://foobar-app-3.herokuapp.com/beertypes"
+  const URL = "https://finalfoobarapp.herokuapp.com/"
+  const Beers = "https://finalfoobarapp.herokuapp.com/beertypes"
   const bartendersArray = []
   const [bartenders, setBartenders] = useState(bartendersArray)
   const queueArray = []
